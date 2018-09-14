@@ -1,3 +1,6 @@
+//th:e implementation of doubly linked list
+//delete & insert:O(1)
+  
 #include "stdio.h"
 
 struct Node
@@ -57,30 +60,45 @@ Position Find( ElementType X,List L )
 
 void Delete( ElementType X,List L )
 {
-    Position P,TmpCell;
+    Position P;
 
-    P = FindPrevious( X,L );
+    P = Find(X,L);
     
-    if( P != NULL )             /* I think here is a bug */
+    if( IsLast(P,L) )            
     {
-        TmpCell = P->Next;
-        P->Next = TmpCell->Next;
-        free( TmpCell );
+     	P->Prev->Next = NULL;
+	    free(P);
+    }
+    else{
+        P->Prev->Next = P->Next;
+        P->Next->Prev = P->Prev;
+        free(P);
     }
 }
 
-/* Insert( after legal position P ) */
-/* Header implementation assumed */
-/* Parameter L is unused in this implementation */
+/* Insert after legal position P*/
 
-void Insert( ElementType X,List L )
+void Insert( ElementType X,Position P)
 {
-    newNode = malloc( sizeof( struct Node ) );
-    newNode.Element = X;
-    newNode.Prev = NULL;
-    newNode.next = L;
-    L.Prev = X;
-    L = X;
+    Position TmpNode;
+
+    TmpNode = malloc( sizeof( struct Node ) );
+    if(TmpNode == NULL)
+        printf("Out of space");
+
+    TmpNode->Element = X;
+
+    if(P->Next == NULL){
+        TmpNode->Prev = P;
+        P->Next = TmpNode;
+        TmpNode->Next = NULL;
+    }
+    else{      
+        TmpNode->Next = P->Next;
+        P->Next->Prev = TmpNode;
+        TmpNode->Prev = P;
+        P->Next = TmpNode;
+    }
 }   
 
 /* delete a list */

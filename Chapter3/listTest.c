@@ -8,7 +8,7 @@ int main()
 
     list = malloc( sizeof( struct Node ) );
 
-    Insert( 2,list,list );
+    Insert( 8,list,list );
     p = list->Next;
     Insert( 5,list,p );
 

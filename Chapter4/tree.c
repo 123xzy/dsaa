@@ -70,3 +70,32 @@ SearchTree Insert(ElementType X,SearchTree T)
 
     return T;
 }
+
+SearchTree Delete(SearchTree T,ElementType X)
+{
+    Position TmpCell;
+
+    if(T == NULL)
+        printf("element does not exist");
+    else if(T->Element < X) /* Go Right */
+        T->Right = Delete(T->Right,X);
+    else if(T->Element > X) /* Go left */
+        T->Left = Delete(T->Left,X);
+    else if(T->Element == X)
+    {
+        TmpCell = T;
+
+        /* if T has one child or zero child */
+        if(T->Left == NULL)
+            T = T->Right;
+        else if(T->Right == NULL)
+            T = T->Left;
+        free(TmpCell);
+    
+        /* Two children */
+        TmpCell = FindMin(T->Right);
+        T->Element = TmpCell->Element;
+        T->Right = Delete(T->Right,T->Element);
+    }
+    return T;
+}

@@ -99,3 +99,13 @@ SearchTree Delete(SearchTree T,ElementType X)
     }
     return T;
 }
+
+void PrintTree(SearchTree T)
+{   
+    if(T != NULL)
+    {   
+        PrintTree(T->Left);
+        printf("%d",T->Element);
+        PrintTree(T->Right);
+    }
+}

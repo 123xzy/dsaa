@@ -14,6 +14,7 @@ Position FindMax(SearchTree T);
 SearchTree Insert(SearchTree T,ElementType X);
 SearchTree Delete(SearchTree T,ElementType X);
 ElementType Retrieve(Position P);
+void PrintTree(Search T);
 
 #endif /* _Tree_H_ */
 

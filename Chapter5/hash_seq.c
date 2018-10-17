@@ -49,7 +49,7 @@ HashTable InitializeTable(int TableSize)
 		else
 			H->TheLists[i]->Next = NULL;	
 	}	
-	
+
 	return H;
 }
 
